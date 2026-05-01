@@ -29,4 +29,9 @@ object DatabaseModule {
     fun providePostDao(database: AppDatabase): PostDao {
         return database.postDao()
     }
+
+    @Provides
+    fun providePostRemoteKeysDao(database: AppDatabase): PostRemoteKeysDao {
+        return database.postRemoteKeysDao()
+    }
 }

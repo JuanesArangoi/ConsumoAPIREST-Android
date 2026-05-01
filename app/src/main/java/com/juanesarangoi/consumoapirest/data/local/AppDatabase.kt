@@ -5,16 +5,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
 import com.juanesarangoi.consumoapirest.data.local.dao.PostDao
+import com.juanesarangoi.consumoapirest.data.local.dao.PostRemoteKeysDao
 import com.juanesarangoi.consumoapirest.data.local.entity.PostEntity
+import com.juanesarangoi.consumoapirest.data.local.entity.PostRemoteKeys
 
 @Database(
-    entities = [PostEntity::class],
+    entities = [PostEntity::class, PostRemoteKeys::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     
     abstract fun postDao(): PostDao
+    abstract fun postRemoteKeysDao(): PostRemoteKeysDao
     
     companion object {
         @Volatile

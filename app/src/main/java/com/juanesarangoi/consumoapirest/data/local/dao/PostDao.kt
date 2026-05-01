@@ -13,6 +13,12 @@ interface PostDao {
     @Query("SELECT * FROM posts WHERE isFavorite = 1 ORDER BY timestamp DESC")
     fun getFavoritePosts(): Flow<List<PostEntity>>
     
+    @Query("SELECT * FROM posts ORDER BY timestamp DESC")
+    suspend fun getAllPostsSync(): List<PostEntity>
+    
+    @Query("SELECT * FROM posts WHERE isFavorite = 1 ORDER BY timestamp DESC")
+    suspend fun getFavoritePostsSync(): List<PostEntity>
+    
     @Query("SELECT * FROM posts WHERE id = :id")
     suspend fun getPostById(id: Int): PostEntity?
     
@@ -33,4 +39,22 @@ interface PostDao {
     
     @Query("UPDATE posts SET isFavorite = :isFavorite WHERE id = :id")
     suspend fun updateFavoriteStatus(id: Int, isFavorite: Boolean)
+    
+    @Query("SELECT * FROM posts WHERE title LIKE '%' || :query || '%' ORDER BY timestamp DESC")
+    suspend fun searchPostsByTitle(query: String): List<PostEntity>
+    
+    @Query("SELECT * FROM posts WHERE userId = :userId ORDER BY timestamp DESC")
+    suspend fun searchPostsByUserId(userId: Int): List<PostEntity>
+    
+    @Query("SELECT * FROM posts WHERE title LIKE '%' || :query || '%' AND userId = :userId ORDER BY timestamp DESC")
+    suspend fun searchPostsByTitleAndUserId(query: String, userId: Int): List<PostEntity>
+    
+    @Query("SELECT * FROM posts WHERE title LIKE '%' || :query || '%' ORDER BY timestamp DESC")
+    fun searchPostsByTitleFlow(query: String): Flow<List<PostEntity>>
+    
+    @Query("SELECT * FROM posts WHERE userId = :userId ORDER BY timestamp DESC")
+    fun searchPostsByUserIdFlow(userId: Int): Flow<List<PostEntity>>
+    
+    @Query("SELECT * FROM posts WHERE title LIKE '%' || :query || '%' AND userId = :userId ORDER BY timestamp DESC")
+    fun searchPostsByTitleAndUserIdFlow(query: String, userId: Int): Flow<List<PostEntity>>
 }

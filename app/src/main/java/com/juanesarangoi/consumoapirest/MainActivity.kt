@@ -16,7 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.juanesarangoi.consumoapirest.data.local.entity.PostEntity
 import com.juanesarangoi.consumoapirest.presentation.ui.PostDetailScreen
-import com.juanesarangoi.consumoapirest.presentation.ui.PostListScreen
+import com.juanesarangoi.consumoapirest.presentation.ui.PagedPostListScreen
 import com.juanesarangoi.consumoapirest.presentation.viewmodel.PostViewModel
 import com.juanesarangoi.consumoapirest.ui.theme.ConsumoAPIRESTAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +48,7 @@ fun PostNavigation() {
         startDestination = "post_list"
     ) {
         composable("post_list") {
-            PostListScreen(
+            PagedPostListScreen(
                 viewModel = viewModel,
                 onPostClick = { post ->
                     navController.navigate("post_detail/${post.id}")
