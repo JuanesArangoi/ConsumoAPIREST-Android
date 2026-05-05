@@ -59,7 +59,7 @@ fun PagedPostListScreen(
                             tint = if (isConnected) Color.Green else Color.Red
                         )
                         Text(
-                            text = if (isConnected) "Online" : "Offline",
+                            text = if (isConnected) "Online" else "Offline",
                             modifier = Modifier.padding(horizontal = 4.dp)
                         )
                     }
