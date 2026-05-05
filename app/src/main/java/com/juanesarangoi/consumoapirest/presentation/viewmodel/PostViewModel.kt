@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,18 +38,12 @@ class PostViewModel @Inject constructor(
     val showFavorites: StateFlow<Boolean> = _showFavorites.asStateFlow()
     
     // Posts paginados para scroll infinito
-    private val _pagedPosts = MutableStateFlow<Flow<PagingData<PostEntity>>>(emptyFlow())
-    val pagedPosts: StateFlow<Flow<PagingData<PostEntity>>> = _pagedPosts.asStateFlow()
+    val pagedPosts: Flow<PagingData<PostEntity>>
     
     // Estado de conexión a internet
     val isConnected: StateFlow<Boolean> = networkManager.isConnected
     
-    // Inicialización: cargar posts y observar cambios
-    init {
-        loadPosts()
-        observePosts()
-    }
-    
+        
     // Observar cambios en los posts desde la base de datos local
     private fun observePosts() {
         viewModelScope.launch {
@@ -72,6 +67,16 @@ class PostViewModel @Inject constructor(
                 }
             }
         }
+    }
+    
+    // Inicializar pagedPosts
+    init {
+        pagedPosts = combine(_showFavorites) { showFavorites ->
+            repository.getPagedPosts(showFavorites)
+        }.flatMapLatest { it }
+        
+        loadPosts()
+        observePosts()
     }
     
     // Refrescar posts desde la API (si hay conexión)
@@ -108,7 +113,7 @@ class PostViewModel @Inject constructor(
     // Alternar entre mostrar todos los posts o solo favoritos
     fun toggleShowFavorites() {
         _showFavorites.value = !_showFavorites.value
-        _pagedPosts.value = repository.getPagedPosts(_showFavorites.value)
+        observePosts()
     }
     
     // Limpiar mensaje de error
@@ -162,7 +167,6 @@ class PostViewModel @Inject constructor(
     // Cargar posts iniciales (desde API si hay conexión, desde BD local si no)
     private fun loadPosts() {
         _uiState.value = _uiState.value.copy(isLoading = true)
-        _pagedPosts.value = repository.getPagedPosts(_showFavorites.value)
         
         viewModelScope.launch {
             if (networkManager.isConnected.value) {
