@@ -32,8 +32,7 @@ fun PagedPostListScreen(
     val uiState by viewModel.uiState.collectAsState()
     val showFavorites by viewModel.showFavorites.collectAsState()
     val isConnected by viewModel.isConnected.collectAsState()
-    val pagedPostsFlow by viewModel.pagedPosts.collectAsState()
-    val pagedPosts = pagedPostsFlow.collectAsLazyPagingItems()
+    val pagedPosts = viewModel.pagedPosts.collectAsLazyPagingItems()
 
     LaunchedEffect(uiState.error) {
         uiState.error?.let {
@@ -126,7 +125,7 @@ fun PagedPostListScreen(
                     ) {
                         items(
                             count = pagedPosts.itemCount,
-                            key = pagedPosts.itemKey { it.id }
+                            key = pagedPosts.itemKey { post -> post.id }
                         ) { index ->
                             pagedPosts[index]?.let { post ->
                                 PostItem(

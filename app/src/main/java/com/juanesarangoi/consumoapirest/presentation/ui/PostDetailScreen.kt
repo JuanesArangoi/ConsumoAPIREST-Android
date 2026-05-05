@@ -102,7 +102,7 @@ fun PostDetailScreen(
                     Text(
                         text = post.body,
                         style = MaterialTheme.typography.bodyLarge,
-                        lineHeight = 24.dp
+                        lineHeight = 24.sp
                     )
                 }
             }
