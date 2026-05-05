@@ -71,9 +71,9 @@ class PostViewModel @Inject constructor(
     
     // Inicializar pagedPosts
     init {
-        pagedPosts = combine(_showFavorites) { showFavorites ->
+        pagedPosts = _showFavorites.flatMapLatest { showFavorites ->
             repository.getPagedPosts(showFavorites)
-        }.flatMapLatest { it }
+        }
         
         loadPosts()
         observePosts()

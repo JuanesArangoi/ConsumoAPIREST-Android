@@ -125,7 +125,7 @@ fun PagedPostListScreen(
                     ) {
                         items(
                             count = pagedPosts.itemCount,
-                            key = pagedPosts.itemKey { post -> post.id }
+                            key = { index -> pagedPosts[index]?.id ?: index }
                         ) { index ->
                             pagedPosts[index]?.let { post ->
                                 PostItem(
