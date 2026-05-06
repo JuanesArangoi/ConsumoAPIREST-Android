@@ -2,7 +2,7 @@
 
 Aplicación Android que demuestra el uso de **Retrofit** para consumir APIs REST y **Room** para persistencia de datos local, siguiendo las guías del curso de Construcción de Aplicaciones Móviles.
 
-## 🎯 Objetivo
+## Objetivo
 
 Esta aplicación implementa una arquitectura moderna con los siguientes componentes:
 
@@ -13,7 +13,7 @@ Esta aplicación implementa una arquitectura moderna con los siguientes componen
 - **MVVM**: Arquitectura Modelo-Vista-ViewModel
 - **Repository Pattern**: Separación de responsabilidades
 
-## 📱 Funcionalidades
+## Funcionalidades
 
 - **Lista de Posts**: Muestra posts obtenidos desde la API
 - **Posts Favoritos**: Sistema de favoritos persistido localmente
@@ -21,7 +21,7 @@ Esta aplicación implementa una arquitectura moderna con los siguientes componen
 - **Modo Offline**: Funciona con datos cacheados en Room
 - **Refrescar Datos**: Sincronización con la API
 
-## 🏗️ Arquitectura
+## Arquitectura
 
 ```
 app/
@@ -42,7 +42,7 @@ app/
 └── MainActivity.kt
 ```
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 - **Kotlin**: Lenguaje de programación
 - **Jetpack Compose**: UI framework
@@ -52,14 +52,14 @@ app/
 - **Coroutines**: Programación asíncrona
 - **Navigation**: Navegación entre pantallas
 
-## 📚 Guías Referenciadas
+## Guías Referenciadas
 
 Este proyecto se basa en las siguientes guías del curso:
 
 - [Persistencia de Datos en Android](https://caflorezvi.github.io/guias-apps-moviles/17.persistencia.html)
 - [Retrofit y Comunicación con APIs REST](https://caflorezvi.github.io/guias-apps-moviles/18.apis-rest.html)
 
-## 🚀 Instalación
+## Instalación
 
 1. Clonar el repositorio:
 ```bash
@@ -72,17 +72,17 @@ git clone https://github.com/JuanesArangoi/ConsumoAPIREST-Android.git
 
 4. Ejecutar en un dispositivo o emulador
 
-## 📋 Requisitos
+## Requisitos
 
 - Android Studio Hedgehog o superior
 - Android SDK 24 (Android 7.0) o superior
 - Kotlin 1.9.10
 
-## 🔧 Configuración
+## Configuración
 
 La aplicación utiliza la API pública **JSONPlaceholder** (https://jsonplaceholder.typicode.com/) que no requiere configuración adicional.
 
-## 📖 Uso
+## Uso
 
 1. **Lista Principal**: Muestra todos los posts obtenidos de la API
 2. **Favoritos**: Click en el ícono ❤️ para marcar como favorito
@@ -90,7 +90,7 @@ La aplicación utiliza la API pública **JSONPlaceholder** (https://jsonplacehol
 4. **Refrescar**: Click en el ícono de refrescar para sincronizar con la API
 5. **Detalle**: Click en cualquier post para ver detalles completos
 
-## 🔄 Flujo de Datos
+## Flujo de Datos
 
 1. La aplicación intenta cargar posts desde la API REST
 2. Los datos se guardan en la base de datos Room
@@ -98,7 +98,7 @@ La aplicación utiliza la API pública **JSONPlaceholder** (https://jsonplacehol
 4. Los cambios se reflejan automáticamente en la UI
 5. Los favoritos se persisten localmente
 
-## 🎨 Componentes Principales
+## Componentes Principales
 
 ### Room Database
 - **PostEntity**: Entidad para posts
@@ -115,6 +115,6 @@ La aplicación utiliza la API pública **JSONPlaceholder** (https://jsonplacehol
 - **PostDetailScreen**: Detalle de post
 - **PostViewModel**: Lógica de negocio
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto es parte de la actividad académica del curso de Construcción de Aplicaciones Móviles.
